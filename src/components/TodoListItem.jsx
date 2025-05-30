@@ -1,5 +1,12 @@
+import "./TodoListItem.css";
+
 const TodoListItem = ({ todo }) => {
-  return <div>{todo}</div>;
+  return (
+    <div className="todo">
+      {todo}
+      <button>x</button>
+    </div>
+  );
 };
 
 export default TodoListItem;

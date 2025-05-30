@@ -17,6 +17,8 @@ const TodoList = () => {
     }
   };
 
+  const deleteTodo = () => {};
+
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("todos"));
     if (storedTodos !== null && storedTodos.todos.length > 0) {

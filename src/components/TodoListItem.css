@@ -1,0 +1,9 @@
+.todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  border: 2px solid #f9f9f9;
+  border-radius: 8px;
+  padding: 4px;
+}

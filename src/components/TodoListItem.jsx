@@ -1,10 +1,10 @@
 import "./TodoListItem.css";
 
-const TodoListItem = ({ todo }) => {
+const TodoListItem = ({ todo, handleDelete, index }) => {
   return (
     <div className="todo">
       {todo}
-      <button>x</button>
+      <button onClick={() => handleDelete(index)}>x</button>
     </div>
   );
 };

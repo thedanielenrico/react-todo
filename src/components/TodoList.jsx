@@ -17,7 +17,12 @@ const TodoList = () => {
     }
   };
 
-  const deleteTodo = () => {};
+  const deleteTodo = (index) => {
+    const newArr = todos.slice();
+    newArr.splice(index, 1);
+    setTodos(newArr);
+    localStorage.setItem("todos", JSON.stringify({ todos: [...newArr] }));
+  };
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("todos"));
@@ -29,7 +34,7 @@ const TodoList = () => {
   return (
     <div>
       <div>
-        <label for="newTodo">Todo: </label>
+        <label htmlFor="newTodo">Todo: </label>
         <input
           name="newTodo"
           id="newTodo"
@@ -46,7 +51,12 @@ const TodoList = () => {
         </button>
       </div>
       {todos.map((t, i) => (
-        <TodoListItem key={t + i} todo={t} />
+        <TodoListItem
+          key={t + i}
+          todo={t}
+          handleDelete={deleteTodo}
+          index={i}
+        />
       ))}
     </div>
   );

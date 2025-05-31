@@ -5,6 +5,19 @@ import { useState, useEffect } from "react";
 const TodoList = () => {
   const [newTodo, setNewTodo] = useState("");
   const [todos, setTodos] = useState([]);
+  const [isTabActive, setIsTabActive] = useState(
+    document.visibilityState === "visible"
+  );
+
+  const handleVisibityChange = () => {
+    setIsTabActive(document.visibilityState === "visible");
+  };
+
+  useEffect(() => {
+    document.addEventListener("visibilitychange", handleVisibityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibityChange);
+  }, []);
 
   const handleAddNewTodo = () => {
     if (newTodo.length > 0) {
@@ -23,13 +36,13 @@ const TodoList = () => {
     setTodos(newArr);
     localStorage.setItem("todos", JSON.stringify({ todos: [...newArr] }));
   };
-
+  // BUG: deleting all todos doesn't work between tabs
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("todos"));
     if (storedTodos !== null && storedTodos.todos.length > 0) {
       setTodos(storedTodos.todos);
     }
-  }, []);
+  }, [isTabActive, todos]);
 
   return (
     <div>

@@ -36,13 +36,15 @@ const TodoList = () => {
     setTodos(newArr);
     localStorage.setItem("todos", JSON.stringify({ todos: [...newArr] }));
   };
-  // BUG: deleting all todos doesn't work between tabs
+
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("todos"));
     if (storedTodos !== null && storedTodos.todos.length > 0) {
       setTodos(storedTodos.todos);
+    } else {
+      setTodos([]);
     }
-  }, [isTabActive, todos]);
+  }, [isTabActive]);
 
   return (
     <div>
